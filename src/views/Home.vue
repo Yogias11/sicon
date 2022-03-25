@@ -3,7 +3,17 @@
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div> -->
-  <body>
+  <!-- <body> -->
+
+    <div class="topnav" id="myTopnav">
+  <a href="#home" class="active">Home</a>
+  <a href="#news">News</a>
+  <a href="#contact">Contact</a>
+  <a href="#about">About</a>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
 
 <div class="sidebar">
   <h2>IconBuy</h2>
@@ -17,39 +27,68 @@
 
   <h5>Size</h5>
   <div class="radio">
-    <input label="16" type="radio" id="male" name="gender" value="male" checked>
-    <input label="24" type="radio" id="female" name="gender" value="female">
-    <input label="32" type="radio" id="other" name="gender" value="other">
-    <input label="48" type="radio" id="other" name="gender" value="other">
-    <input label="64" type="radio" id="other" name="gender" value="other">
-    <input label="96" type="radio" id="other" name="gender" value="other">
+    <input label="16" type="radio" id="male" name="gender" value="16" checked @change="sizeChange($event)">
+    <input label="24" type="radio" id="female" name="gender" value="24" @change="sizeChange($event)">
+    <input label="32" type="radio" id="other" name="gender" value="32" @change="sizeChange($event)">
+    <input label="48" type="radio" id="other" name="gender" value="48" @change="sizeChange($event)">
+    <input label="64" type="radio" id="other" name="gender" value="64" @change="sizeChange($event)">
+    <input label="96" type="radio" id="other" name="gender" value="96" @change="sizeChange($event)">
   </div>
 
   <h5>Stroke</h5>
   <div class="radio">
-    <input label="16" type="radio" id="male" name="stroke" value="male" checked>
-    <input label="24" type="radio" id="female" name="stroke" value="female">
-    <input label="32" type="radio" id="other" name="stroke" value="other">
-    <input label="48" type="radio" id="other" name="stroke" value="other">
-    <input label="64" type="radio" id="other" name="stroke" value="other">
-    <input label="96" type="radio" id="other" name="stroke" value="other">
+    <input label="0.5" type="radio" id="male" name="stroke" value="0.5" checked @change="strokeChange($event)">
+    <input label="1" type="radio" id="female" name="stroke" value="1" @change="strokeChange($event)">
+    <input label="1.5" type="radio" id="other" name="stroke" value="1.5" @change="strokeChange($event)">
+    <input label="2" type="radio" id="other" name="stroke" value="2" @change="strokeChange($event)">
+    <input label="2.5" type="radio" id="other" name="stroke" value="2.5" @change="strokeChange($event)">
+    <input label="3" type="radio" id="other" name="stroke" value="3" @change="strokeChange($event)">
   </div>
+
+  <h5>Colors</h5>
+
 </div>
 
 <div class="content">
-  <h2>Responsive Sidebar Example</h2>
+  <h2>Test</h2>
+  <!-- <h2>Responsive Sidebar Example</h2>
   <p>This example use media queries to transform the sidebar to a top navigation bar when the screen size is 700px or less.</p>
   <p>We have also added a media query for screens that are 400px or less, which will vertically stack and center the navigation links.</p>
-  <h3>Resize the browser window to see the effect.</h3>
+  <h3>Resize the browser window to see the effect.</h3> -->
+  <div class="row">
+    <div class="column" v-for="item in 100" :key="item">
+      <img src="../assets/Buy.svg" alt="Nature" style="width:30%" onclick="myFunction(this);">
+    </div>
+    
+  </div>
+
 </div>
 
-</body>
+<!-- </body> -->
 </template>
 
 <script>
 
 export default {
-  
+    name: 'Home',
+    methods: {
+      sizeChange(event) {
+        var size = event.target.value;
+        console.log(size);
+      },
+      strokeChange(event) {
+        var stroke = event.target.value;
+        console.log(stroke);
+      },
+      myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
+        }
+      }
+    }
 }
 </script>
 
@@ -59,10 +98,43 @@ body {
   font-family: "Lato", sans-serif;
 }
 
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The grid: Four equal columns that floats next to each other */
+.column {
+  float: left;
+  margin-left: 5px;
+  width: 10%;
+  /* padding: 5px; */
+}
+
+/* Style the images inside the grid */
+.column img {
+  opacity: 0.8; 
+  cursor: pointer; 
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+/* The expanding image container */
+.container {
+  position: relative;
+  display: none;
+}
+
 .radio {
 	background: #454857;
-	padding: 4px;
-	border-radius: 3px;
+	padding: 3px;
+  margin-left: 5px;
+  margin-right: 5px;
+	border-radius: 2px;
 	box-shadow: inset 0 0 0 3px rgba(35, 33, 45, 0.3),
 		0 0 0 3px rgba(185, 185, 185, 0.3);
 	position: relative;
@@ -75,7 +147,7 @@ body {
 	outline: none;
 	cursor: pointer;
 	border-radius: 2px;
-	padding: 4px 8px;
+	padding: 2px 4px;
 	background: #454857;
 	color: #bdbdbdbd;
 	font-size: 14px;
@@ -97,6 +169,36 @@ body {
 	display: inline-block;
 	text-align: center;
 	width: 100%;
+}
+
+.topnav {
+  margin-left: 250px;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav .icon {
+  display: none;
 }
 
 .sidebar {
@@ -128,6 +230,7 @@ body {
 
 div.content {
   margin-left: 200px;
+  margin-top: 50px;
   padding: 1px 16px;
   height: 1000px;
 }
@@ -138,6 +241,19 @@ div.content {
     height: auto;
     position: relative;
   }
+
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+
   .sidebar a {float: left;}
   div.content {margin-left: 0;}
 }
