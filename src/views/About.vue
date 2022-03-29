@@ -112,7 +112,9 @@
             <div class="row">
               <div class="col">
                  <select class="form-control" id="exampleFormControlSelect1">
-                    <option>1</option>
+                    <option>1
+                        <span class="badge badge-info">100</span>
+                    </option>
                     <option>2</option>
                     <option>3</option>
                     <option>4</option>
@@ -120,15 +122,20 @@
                   </select>
               </div>
               <div class="col">
-                <input type="text" class="form-control" placeholder="Last name">
+                <input type="text" class="form-control" placeholder="Name">
               </div>
             </div>
 
             <br>
             <div class="row">
-              <div class="col" v-for="item in 100" :key="item">
-                <p>Test</p>
-              </div>
+                <ul class="row row-cols-3 row-cols-sm-12 row-cols-lg-6 row-cols-xl-8 list-unstyled list">
+                    <li class="col mb-1" data-tags="numbers" data-categories="typography" v-for="item in 100" :key="item"><a class="d-block text-dark text-decoration-none" href="#" >
+                         <div class="p-3 py-4 mb-2 bg-light text-center rounded"><svg class="bi" width="1em" height="1em" fill="currentColor">
+                        <use xlink:href="" />
+                        </svg></div>
+                        <div class="name text-muted text-decoration-none text-center pt-1">Contoh {{ item }}</div>
+                    </a></li>
+                </ul>
             </div>
 
           </div>
