@@ -129,11 +129,12 @@
             <br>
             <div class="row">
                 <ul class="row row-cols-3 row-cols-sm-12 row-cols-lg-6 row-cols-xl-8 list-unstyled list">
-                    <li class="col mb-1" data-tags="numbers" data-categories="typography" v-for="item in 100" :key="item"><a class="d-block text-dark text-decoration-none" href="#" >
+                    <li class="col mb-1" data-tags="numbers" data-categories="typography" v-for="item in images" :key="item.id">
+                        <a class="d-block text-dark text-decoration-none" href="{{ item.name }}" >
                          <div class="p-3 py-4 mb-2 bg-light text-center rounded"><svg class="bi" width="1em" height="1em" fill="currentColor">
-                        <use xlink:href="" />
+                        <use xlink:href="{{ item.filename }}" />
                         </svg></div>
-                        <div class="name text-muted text-decoration-none text-center pt-1">Contoh {{ item }}</div>
+                        <div class="name text-muted text-decoration-none text-center pt-1">{{ item.name }}</div>
                     </a></li>
                 </ul>
             </div>
@@ -143,8 +144,14 @@
 </template>
 
 <script>
+import Axios from 'axios'
 export default {
    name: 'Home',
+   data () {
+        return {
+            images: null
+        }
+    },
     methods: {
       sizeChange(event) {
         var size = event.target.value;
@@ -163,7 +170,11 @@ export default {
         }
       },
       // $('#cp2, #cp3a, #cp3b').colorpicker();
-    }
+    },
+    mounted() {
+        Axios.get('https://sicons.herokuapp.com/image')
+            .then((response) => (this.images = response.data))
+    },
 }
 </script>
 
