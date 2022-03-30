@@ -111,30 +111,33 @@
 
             <div class="row">
               <div class="col">
-                 <select class="form-control" id="exampleFormControlSelect1">
-                    <option>1
-                        <span class="badge badge-info">100</span>
-                    </option>
-                    <option>2</option>
+                 <select class="form-control" id="exampleFormControlSelect1" v-model="kategori">
+                     <option value="all">All</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
                     <option>3</option>
                     <option>4</option>
                     <option>5</option>
                   </select>
               </div>
               <div class="col">
-                <input type="text" class="form-control" placeholder="Name">
+                <input type="text" class="form-control" placeholder="Cari" v-model="cari">
               </div>
             </div>
 
             <br>
             <div class="row">
                 <ul class="row row-cols-3 row-cols-sm-12 row-cols-lg-6 row-cols-xl-8 list-unstyled list">
-                    <li class="col mb-1" data-tags="numbers" data-categories="typography" v-for="item in images" :key="item.id">
+                    <li class="col mb-1" data-tags="numbers" data-categories="typography" v-for="item in filterImage" :key="item.id">
                         <a class="d-block text-dark text-decoration-none" href="{{ item.name }}" >
-                         <div class="p-3 py-4 mb-2 bg-light text-center rounded"><svg class="bi" width="1em" height="1em" fill="currentColor">
-                        <use xlink:href="{{ item.filename }}" />
-                        </svg></div>
-                        <div class="name text-muted text-decoration-none text-center pt-1">{{ item.name }}</div>
+                         <div class="p-3 py-4 mb-2 bg-light text-center rounded">
+                             <!-- <svg class="bi" width="1em" height="1em" fill="currentColor">
+                        <use xlink:href="" />
+                        </svg> -->
+                        {{ item.filename }}
+                        </div>
+                        
+                        <div class="name text-muted text-decoration-none text-center pt-1">{{ item.name }} {{ item.kategori }}</div>
                     </a></li>
                 </ul>
             </div>
@@ -149,7 +152,9 @@ export default {
    name: 'Home',
    data () {
         return {
-            images: null
+            cari: "",
+            images: [],
+            kategori: ""
         }
     },
     methods: {
@@ -168,13 +173,29 @@ export default {
         } else {
           x.className = "topnav";
         }
-      },
+      }
+      
       // $('#cp2, #cp3a, #cp3b').colorpicker();
     },
     mounted() {
         Axios.get('https://sicons.herokuapp.com/image')
             .then((response) => (this.images = response.data))
     },
+    computed: {
+        filterImage() {
+            return this.images.filter((item) => {
+                return item.name.toLowerCase().includes(this.cari.toLowerCase())
+            })
+
+            // if(this.kategori === ''){
+            //     return this.images;
+            // } else {
+            //     const category = this.kategori;
+            //     return this.images.filter((gambar) => gambar.attributes === category)
+            // }
+        },
+        
+    }
 }
 </script>
 
