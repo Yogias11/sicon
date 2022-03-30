@@ -129,7 +129,7 @@
             <div class="row">
                 <ul class="row row-cols-3 row-cols-sm-12 row-cols-lg-6 row-cols-xl-8 list-unstyled list">
                     <li class="col mb-1" data-tags="numbers" data-categories="typography" v-for="item in filterImage" :key="item.id">
-                        <a class="d-block text-dark text-decoration-none" href="{{ item.name }}" >
+                        <a class="d-block text-dark text-decoration-none" href="#">
                          <div class="p-3 py-4 mb-2 bg-light text-center rounded">
                              <!-- <svg class="bi" width="1em" height="1em" fill="currentColor">
                         <use xlink:href="" />
