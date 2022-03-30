@@ -112,12 +112,12 @@
             <div class="row">
               <div class="col">
                  <select class="form-control" id="exampleFormControlSelect1" v-model="kategori">
-                     <option value="all">All</option>
+                     <option value="">All</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
                   </select>
               </div>
               <div class="col">
@@ -137,7 +137,7 @@
                         {{ item.filename }}
                         </div>
                         
-                        <div class="name text-muted text-decoration-none text-center pt-1">{{ item.name }} {{ item.kategori }}</div>
+                        <div class="name text-muted text-decoration-none text-center pt-1">{{ item.name }}</div>
                     </a></li>
                 </ul>
             </div>
@@ -173,6 +173,9 @@ export default {
         } else {
           x.className = "topnav";
         }
+      },
+      filterFunc(){
+
       }
       
       // $('#cp2, #cp3a, #cp3b').colorpicker();
@@ -183,16 +186,13 @@ export default {
     },
     computed: {
         filterImage() {
-            return this.images.filter((item) => {
-                return item.name.toLowerCase().includes(this.cari.toLowerCase())
-            })
-
-            // if(this.kategori === ''){
-            //     return this.images;
-            // } else {
-            //     const category = this.kategori;
-            //     return this.images.filter((gambar) => gambar.attributes === category)
-            // }
+            let filter1 = this.images;
+            if (this.kategori){
+                filter1 = this.images.filter(item => item.kategori == this.kategori);
+            }
+            // console.log(filter1);
+            let filter2 = filter1.filter(item => item.name.toLowerCase().includes(this.cari.toLowerCase()));
+            return filter2;
         },
         
     }
